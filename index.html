@@ -1108,7 +1108,7 @@
         <dfn>PaymentDetailsBase</dfn> dictionary
       </h2>
       <pre class="idl">
-        dictionary PaymentDetailsBase {
+        dictionary PaymentDetailsBase : Localizable {
           sequence&lt;PaymentItem&gt; displayItems;
           sequence&lt;PaymentShippingOption&gt; shippingOptions;
           sequence&lt;PaymentDetailsModifier&gt; modifiers;
@@ -1258,10 +1258,10 @@
         <dd>
           When the payment request is updated using <a data-lt=
           "PaymentRequestUpdateEvent.updateWith">updateWith()</a>, the
-          <a>PaymentDetailsUpdate</a> can contain a message in the <a>error</a>
-          member that will be displayed to the user. For example, this might
-          commonly be used to explain why goods cannot be shipped to the chosen
-          shipping address.
+          <a>PaymentDetailsUpdate</a> can contain a human-readable message in
+          the <a>error</a> member that will be displayed to the user. For
+          example, this might commonly be used to explain why goods cannot be
+          shipped to the chosen shipping address.
         </dd>
         <dt>
           <dfn>total</dfn>
@@ -1457,7 +1457,7 @@
         <dfn>PaymentItem</dfn> dictionary
       </h2>
       <pre class="idl">
-        dictionary PaymentItem {
+        dictionary PaymentItem : Localizable {
           required DOMString label;
           required PaymentCurrencyAmount amount;
           boolean pending = false;
@@ -1632,7 +1632,7 @@
         <dfn>PaymentShippingOption</dfn> dictionary
       </h2>
       <pre class="idl">
-        dictionary PaymentShippingOption {
+        dictionary PaymentShippingOption : Localizable {
           required DOMString id;
           required DOMString label;
           required PaymentCurrencyAmount amount;
@@ -1924,6 +1924,68 @@
           </tr>
         </table>
       </section>
+    </section>
+    <section data-dfn-for="Localizable" data-link-for="Localizable">
+      <h2><dfn>Localizable</dfn> dictionary</h2>
+      <pre class="idl">
+        dictionary Localizable {
+          DOMString lang;
+          TextDirection dir = "auto";
+        };
+      </pre>
+      <dl>
+        <dt>
+          <dfn>lang</dfn> member
+        </dt>
+        <dd>
+          A [[!BCP47]] language tag that specifies the primary language for the
+          values of the human-readable members of the inheriting dictionary.
+        </dd>
+        <dt>
+          <dfn>dir</dfn> member
+        </dt>
+        <dd>
+          Specifies the base direction for the human-readable members of an
+          inheriting dictionary.
+        </dd>
+      </dl>
+    </section>
+    <section data-dfn-for="TextDirection" data-link-for=
+    "TextDirection">
+      <h2>
+        <dfn>TextDirection</dfn> enum
+      </h2>
+      <pre class="idl">
+        enum TextDirection {
+          "auto",
+          "ltr",
+          "rtl"
+        };
+      </pre>
+      <p>
+        The text-direction values are the following, implying that the value of
+        the human-readable members is by default:
+      </p>
+      <dl>
+        <dt>
+          <dfn>auto</dfn>
+        </dt>
+        <dd>
+          Directionality is determined by the [[!BIDI]] algorithm.
+        </dd>
+        <dt>
+          <dfn>ltr</dfn>
+        </dt>
+        <dd>
+          Left-to-right text.
+        </dd>
+        <dt>
+          <dfn>rtl</dfn>
+        </dt>
+        <dd>
+          Right-to-left text.
+        </dd>
+      </dl>
     </section>
     <section class="informative">
       <h2>
